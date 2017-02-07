@@ -35,7 +35,7 @@ class augeas::params {
       } else {
         $ruby_pkg = 'libaugeas-ruby1.8'
       }
-      $augeas_pkgs = ['augeas-lenses', 'libaugeas0', 'augeas-tools']
+      $augeas_pkgs = ['augeas-lenses', 'libaugeas0', 'libaugeas-dev', 'augeas-tools']
     }
 
     default:  { fail("Unsupported OS family: ${::osfamily}") }
