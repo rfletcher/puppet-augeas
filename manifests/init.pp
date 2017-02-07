@@ -10,6 +10,7 @@
 #   ['purge']        - whether to purge lens directories
 class augeas (
   $version      = present,
+  $manage_ruby  = true,
   $ruby_package = $::augeas::params::ruby_pkg,
   $ruby_version = present,
   $lens_dir     = $::augeas::params::lens_dir,
@@ -26,9 +27,11 @@ class augeas (
     class {'::augeas::files': } ->
     anchor { 'augeas::end': }
 
-    # lint:ignore:spaceship_operator_without_tag
-    Package['ruby-augeas', $augeas::params::augeas_pkgs] -> Augeas <| |>
-    # lint:endignore
+    if $manage_ruby {
+      # lint:ignore:spaceship_operator_without_tag
+      Package['ruby-augeas', $augeas::params::augeas_pkgs] -> Augeas <| |>
+      # lint:endignore
+    }
   }
 
 }

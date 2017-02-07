@@ -7,8 +7,10 @@ class augeas::packages {
     ensure => $::augeas::version,
   }
 
-  package { 'ruby-augeas':
-    ensure => $::augeas::ruby_version,
-    name   => $::augeas::ruby_package,
+  if $::augeas::manage_ruby {
+    package { 'ruby-augeas':
+      ensure => $::augeas::ruby_version,
+      name   => $::augeas::ruby_package,
+    }
   }
 }
